@@ -4,21 +4,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
-import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-import { pipeRating, pipePricing, pipeSearching } from './app.component';
-
+import { pipeRating, pipePricing, pipeSearching, pipeSpecial } from './app.component';
 
 
 @NgModule({
@@ -26,13 +23,13 @@ import { pipeRating, pipePricing, pipeSearching } from './app.component';
     AppComponent,
     pipeRating,
     pipePricing,
-    pipeSearching
+    pipeSearching,
+    pipeSpecial
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule,
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
@@ -42,8 +39,7 @@ import { pipeRating, pipePricing, pipeSearching } from './app.component';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

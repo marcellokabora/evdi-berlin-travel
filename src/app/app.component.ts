@@ -4,6 +4,15 @@ import { FormBuilder } from '@angular/forms';
 import { Pipe, PipeTransform } from '@angular/core';
 
 
+
+interface Tour {
+  title: string
+  price: number
+  currency: string
+  rating: number
+  isSpecialOffer: boolean
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,9 +20,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AppComponent {
 
-  tours: any = []
+  tours: Tour[] = []
 
   search: string = ''
+  specialOffer: boolean = false
 
   ratings = this._formBuilder.group({
     star1: false,
@@ -39,10 +49,10 @@ export class AppComponent {
     private http: HttpClient,
     private _formBuilder: FormBuilder
   ) {
+
     this.http.get("./assets/data.json").subscribe((data: any) => {
       this.tours = data.tours
     })
-
 
     this.ratings.valueChanges.subscribe(values => {
       const rating = []
@@ -92,19 +102,25 @@ export class AppComponent {
 
 @Pipe({ name: 'rating' })
 export class pipeRating implements PipeTransform {
-  transform(items: any, min: number, max: number): any {
-    return items.filter((item: any) => item.rating >= min && item.rating <= max)
+  transform(items: Tour[], min: number, max: number): Tour[] {
+    return items.filter((item: Tour) => item.rating >= min && item.rating <= max)
   }
 }
 @Pipe({ name: 'pricing' })
 export class pipePricing implements PipeTransform {
-  transform(items: any, min: number, max: number): any {
-    return items.filter((item: any) => item.price >= min && item.price <= max)
+  transform(items: Tour[], min: number, max: number): Tour[] {
+    return items.filter((item: Tour) => item.price >= min && item.price <= max)
   }
 }
 @Pipe({ name: 'searching' })
 export class pipeSearching implements PipeTransform {
-  transform(items: any, search: string): any {
-    return items.filter((item: any) => item.title.toUpperCase().indexOf(search.toUpperCase()) > -1)
+  transform(items: Tour[], search: string): Tour[] {
+    return items.filter((item: Tour) => item.title.toUpperCase().indexOf(search.toUpperCase()) > -1)
+  }
+}
+@Pipe({ name: 'pipespecial' })
+export class pipeSpecial implements PipeTransform {
+  transform(items: Tour[], special: boolean): Tour[] {
+    return items.filter((item: Tour) => special ? item.isSpecialOffer === true : true)
   }
 }

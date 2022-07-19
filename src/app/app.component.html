@@ -65,9 +65,15 @@
     </div>
 
 
+    <div class="filter-section">
+      <mat-slide-toggle class="example-margin" [(ngModel)]="specialOffer">Special Offert</mat-slide-toggle>
+    </div>
+
+
   </mat-drawer>
 
   <div class="example-sidenav-content">
+
     <mat-toolbar color="primary">
       <button mat-icon-button>
         <mat-icon>search</mat-icon>
@@ -80,10 +86,9 @@
     </mat-toolbar>
 
     <div class="core-main">
-
       <mat-list>
-        <mat-list-item *ngFor="let item of tours | searching:search | rating:minrate:maxrate | pricing:minprice:maxprice">
-          <mat-icon mat-list-icon>explore</mat-icon>
+        <mat-list-item *ngFor="let item of tours | searching:search | rating:minrate:maxrate | pricing:minprice:maxprice | pipespecial:specialOffer">
+          <mat-icon mat-list-icon [style.color]="item.isSpecialOffer ? 'blue' : 'black'">sell</mat-icon>
           <div mat-line class="title" [innerHTML]="item.title"></div>
           <div mat-line class="infos">
             <span class="label">price:</span>
@@ -95,12 +100,7 @@
           </div>
         </mat-list-item>
       </mat-list>
-
     </div>
-
-
-
-
 
   </div>
 
